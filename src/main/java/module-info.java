@@ -6,6 +6,6 @@ module com.analistas.agendafx {
     opens com.analistas.agendafx to javafx.fxml;
     exports com.analistas.agendafx;
     
-    opens com.analistas.controller to javafx.fxml;
-    exports com.analistas.controller;
+    opens com.analistas.agendafx.controller to javafx.fxml;
+    exports com.analistas.agendafx.controller;
 }
