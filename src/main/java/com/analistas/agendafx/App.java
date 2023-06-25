@@ -9,7 +9,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 
 /**
- * JavaFX App 
+ * JavaFX App
  */
 public class App extends Application {
 

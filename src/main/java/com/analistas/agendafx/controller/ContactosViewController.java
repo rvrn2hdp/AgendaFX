@@ -19,6 +19,7 @@ import javafx.scene.control.TableView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.Window;
+
 /**
  * FXML Controller class
  *
@@ -46,7 +47,7 @@ public class ContactosViewController implements Initializable {
     private Button btnBorrar;
     @FXML
     private TableView<Contacto> tbvContactos;
-    
+
     //Instancia del repositorio de contactos:
     ContactoRepository contactoRepo = new ContactoRepository();
 
@@ -66,18 +67,18 @@ public class ContactosViewController implements Initializable {
                     lblObs.setText(objActual.getObservaciones());
                 })
         );
-    }    
-    
+    }
+
     @FXML
     private void nuevo_OnAction(ActionEvent event) {
-        
+
         Window ventanaPadre = btnNuevo.getScene().getWindow();
         String archivoFXML = "contactos-form-view";
         String titulo = "Nuevo Contacto";
-        
+
         Stage stage = VentanaUtil.abrirDialogo(ventanaPadre, archivoFXML, titulo, Modality.WINDOW_MODAL);
         stage.showAndWait();
-        
+
     }
 
     @FXML

@@ -5,8 +5,11 @@
 package com.analistas.agendafx.util;
 
 import java.io.IOException;
+import java.util.Optional;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -19,9 +22,9 @@ public class VentanaUtil {
      * file.
      *
      * @param ventanaPadre the parent window for the dialog
-     * @param archivoFXML  the name of the FXML file to load
-     * @param titulo       the title of the dialog
-     * @param modalidad    the modality of the dialog
+     * @param archivoFXML the name of the FXML file to load
+     * @param titulo the title of the dialog
+     * @param modalidad the modality of the dialog
      * @return a JavaFX Stage object representing the dialog
      */
     public static Stage abrirDialogo(Window ventanaPadre, String archivoFXML, String titulo, Modality modalidad) {
@@ -44,6 +47,30 @@ public class VentanaUtil {
             System.err.println(ioe.getMessage());
             return null;
         }
+    }
+
+    public static void mostrarInfo(String mensaje) {
+        Alert alerta = new Alert(Alert.AlertType.INFORMATION, mensaje, ButtonType.OK);
+        alerta.showAndWait();
+    }
+
+    public static void mostrarError(String mensaje) {
+        Alert alerta = new Alert(Alert.AlertType.ERROR, mensaje, ButtonType.OK);
+        alerta.showAndWait();
+    }
+
+    public static Boolean mostrarAdvertencia(String mensaje) {
+        Alert alerta = new Alert(Alert.AlertType.WARNING, mensaje, ButtonType.YES, ButtonType.NO);
+        Optional<ButtonType> botonPulsado = alerta.showAndWait();
+
+        return botonPulsado.get() == ButtonType.YES;
+    }
+
+    public static Boolean pedirConfirmacion(String mensaje) {
+        Alert alerta = new Alert(Alert.AlertType.CONFIRMATION, mensaje, ButtonType.YES, ButtonType.NO);
+        Optional<ButtonType> botonPulsado = alerta.showAndWait();
+
+        return botonPulsado.get() == ButtonType.YES;
     }
 
 }
