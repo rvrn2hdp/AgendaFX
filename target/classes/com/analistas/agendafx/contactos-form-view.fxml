@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/20.0.1" 
+            fx:controller="com.analistas.agendafx.controller.ContactosFormViewController">
+    <children>
+        <GridPane layoutX="14.0" layoutY="14.0" prefHeight="293.0" prefWidth="572.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="281.0" minWidth="10.0" prefWidth="155.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="454.0" minWidth="10.0" prefWidth="417.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="80.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+                <Label text="Apellido:" />
+                <Label layoutX="10.0" layoutY="24.0" text="Nombre:" GridPane.rowIndex="1" />
+                <Label layoutX="10.0" layoutY="68.0" text="Dirección:" GridPane.rowIndex="2" />
+                <Label layoutX="10.0" layoutY="112.0" text="Teléfono:" GridPane.rowIndex="3" />
+                <Label layoutX="10.0" layoutY="196.0" text="Fecha de Nacimiento:" GridPane.rowIndex="4" />
+                <Label layoutX="10.0" layoutY="202.0" text="Observaciones:" GridPane.rowIndex="5" />
+                <TextField fx:id="txfApellido" GridPane.columnIndex="1" />
+                <TextField fx:id="txfNombre" layoutX="165.0" layoutY="16.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <TextField fx:id="txfDireccion" layoutX="165.0" layoutY="53.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <TextField fx:id="txfTelefono" layoutX="165.0" layoutY="90.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                <DatePicker fx:id="dtpFechaNacimiento" prefHeight="25.0" prefWidth="246.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                <TextArea fx:id="txaObservaciones" prefHeight="98.0" prefWidth="417.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            </children>
+        </GridPane>
+        <HBox layoutX="386.0" layoutY="345.0" prefHeight="41.0" prefWidth="200.0" spacing="10.0" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0">
+            <children>
+                <Button fx:id="btnGuardar" defaultButton="true" minHeight="30.0" minWidth="100.0" mnemonicParsing="false" onAction="#guardar_OnAction" text="Guardar" />
+                <Button fx:id="btnCancelar" cancelButton="true" layoutX="10.0" layoutY="10.0" minHeight="30.0" minWidth="100.0" mnemonicParsing="false" onAction="#cancelar_OnAction" text="Cancelar" />
+            </children>
+        </HBox>
+    </children>
+</AnchorPane>
