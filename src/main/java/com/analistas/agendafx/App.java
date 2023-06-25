@@ -9,7 +9,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 
 /**
- * JavaFX App
+ * JavaFX App 
  */
 public class App extends Application {
 
@@ -54,7 +54,7 @@ public class App extends Application {
             primaryStage.show();
 
         } catch (IOException ioe) {
-            ioe.printStackTrace();
+            System.err.println(ioe.getMessage());
         }
     }
 
@@ -69,7 +69,7 @@ public class App extends Application {
             rootLayout.setCenter(contactosView);
 
         } catch (IOException ioe) {
-            ioe.printStackTrace();
+            System.err.println(ioe.getMessage());
         }
     }
 

@@ -62,6 +62,8 @@ public class ContactoRepository {
                         null));
     }
     
-    
+    public List<Contacto> getContactos() {
+        return contactos;
+    }
     
 }

@@ -24,7 +24,8 @@ public class Contacto {
     public Contacto() {
     }
 
-    public Contacto(int id, String apellido, String nombre, String direccion, String telefono, LocalDate fechaNacimiento, String observaciones, Ciudad ciudad) {
+    public Contacto(int id, String apellido, String nombre, String direccion, String telefono,
+            LocalDate fechaNacimiento, String observaciones, Ciudad ciudad) {
         this.id = id;
         this.apellido = apellido;
         this.nombre = nombre;
@@ -103,7 +104,7 @@ public class Contacto {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append(apellido).append(", ").append(nombre);
-        
+
         return sb.toString();
     }
 

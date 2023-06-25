@@ -4,6 +4,8 @@
  */
 package com.analistas.agendafx.controller;
 
+import com.analistas.agendafx.model.Contacto;
+import com.analistas.agendafx.repository.ContactoRepository;
 import com.analistas.agendafx.util.VentanaUtil;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -12,6 +14,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.Window;
@@ -22,19 +26,46 @@ import javafx.stage.Window;
  */
 public class ContactosViewController implements Initializable {
 
-
+    @FXML
+    private Label lblApellido;
+    @FXML
+    private Label lblNombre;
+    @FXML
+    private Label lblDireccion;
+    @FXML
+    private Label lblTelefono;
+    @FXML
+    private Label lblFechaDeNacimiento;
+    @FXML
+    private Label lblObs;
     @FXML
     private Button btnNuevo;
     @FXML
     private Button btnEditar;
     @FXML
     private Button btnBorrar;
+    @FXML
+    private TableView<Contacto> tbvContactos;
+    
+    //Instancia del repositorio de contactos:
+    ContactoRepository contactoRepo = new ContactoRepository();
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        tbvContactos.getItems().addAll(contactoRepo.getContactos());
+        tbvContactos.getSelectionModel().selectedItemProperty().addListener(
+                ((obs, objAnterior, objActual) -> {
+                    lblApellido.setText(objActual.getApellido());
+                    lblNombre.setText(objActual.getNombre());
+                    lblTelefono.setText(objActual.getTelefono());
+                    lblDireccion.setText(objActual.getDireccion());
+                    lblFechaDeNacimiento.setText(objActual.getFechaNacimiento().toString());
+                    lblObs.setText(objActual.getObservaciones());
+                })
+        );
     }    
     
     @FXML

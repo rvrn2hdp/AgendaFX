@@ -1,1 +1,10 @@
+com\analistas\agendafx\repository\ContactoRepository.class
+com\analistas\agendafx\model\Ciudad.class
+com\analistas\agendafx\controller\ContactosFormViewController.class
 module-info.class
+com\analistas\agendafx\controller\LayoutViewController.class
+com\analistas\agendafx\controller\ContactosViewController.class
+com\analistas\agendafx\model\Contacto.class
+com\analistas\agendafx\App.class
+com\analistas\agendafx\util\VentanaUtil.class
+com\analistas\agendafx\model\Provincia.class
