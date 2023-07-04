@@ -1,0 +1,5 @@
+module:com.analistas.agendafx
+com.analistas.agendafx
+com.analistas.agendafx.controller
+com.analistas.agendafx.model
+com.analistas.agendafx.repository

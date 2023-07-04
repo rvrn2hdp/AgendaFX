@@ -22,31 +22,31 @@ public class CiudadRepository {
                 "Resistencia",
                 "3500",
                 provinciaRepo.getProvincias().get(0)));
-        
+
         ciudades.add(new Ciudad(
                 2,
                 "Corrientes",
                 "3700",
                 provinciaRepo.getProvincias().get(1)));
-        
+
         ciudades.add(new Ciudad(
                 3,
                 "Formosa",
                 "3600",
                 provinciaRepo.getProvincias().get(2)));
-        
+
         ciudades.add(new Ciudad(
                 4,
                 "Castelli",
                 "3705",
                 provinciaRepo.getProvincias().get(0)));
-        
+
         ciudades.add(new Ciudad(
                 5,
                 "Barranqueras",
                 "3505",
                 provinciaRepo.getProvincias().get(0)));
-        
+
         ciudades.add(new Ciudad(
                 6,
                 "Posadas",
