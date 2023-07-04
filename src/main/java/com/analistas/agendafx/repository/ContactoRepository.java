@@ -11,6 +11,8 @@ import java.util.List;
  */
 public class ContactoRepository {
 
+    CiudadRepository ciudadRepo = new CiudadRepository();
+    
     List<Contacto> contactos;
 
     public ContactoRepository() {
@@ -25,7 +27,7 @@ public class ContactoRepository {
                         "3624123123",
                         LocalDate.parse("1999-07-20"),
                         "Ninguna",
-                        null));
+                        ciudadRepo.getCiudades().get(1)));
 
         contactos.add(
                 new Contacto(
@@ -36,7 +38,7 @@ public class ContactoRepository {
                         "3624392838",
                         LocalDate.parse("1993-01-13"),
                         "Ninguna",
-                        null));
+                        ciudadRepo.getCiudades().get(2)));
 
         contactos.add(
                 new Contacto(
@@ -47,7 +49,7 @@ public class ContactoRepository {
                         "3624123122",
                         LocalDate.parse("2003-03-22"),
                         "Ninguna",
-                        null));
+                        ciudadRepo.getCiudades().get(4)));
 
         contactos.add(
                 new Contacto(
@@ -58,11 +60,23 @@ public class ContactoRepository {
                         "3624321321",
                         LocalDate.parse("1999-02-10"),
                         "Ninguna",
-                        null));
+                        ciudadRepo.getCiudades().get(3)));
     }
 
     public List<Contacto> getContactos() {
         return contactos;
+    }
+    
+    public void addContacto(Contacto contacto) {
+        contactos.add(contacto);
+    }
+    
+    public void editContacto(Contacto contacto) {
+        for(Contacto c : contactos) {
+            if (c.getId() == contacto.getId()) {
+                c = contacto;
+            } 
+        }
     }
 
 }

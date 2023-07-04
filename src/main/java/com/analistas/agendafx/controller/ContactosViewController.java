@@ -62,7 +62,7 @@ public class ContactosViewController implements Initializable {
                     lblApellido.setText(objActual.getApellido());
                     lblNombre.setText(objActual.getNombre());
                     lblTelefono.setText(objActual.getTelefono());
-                    lblDireccion.setText(objActual.getDireccion());
+                    lblDireccion.setText(objActual.getDireccion() + " - " + objActual.getCiudad());
                     lblFechaDeNacimiento.setText(objActual.getFechaNacimiento().toString());
                     lblObs.setText(objActual.getObservaciones());
                 })
@@ -83,10 +83,36 @@ public class ContactosViewController implements Initializable {
 
     @FXML
     private void editar_OnAction(ActionEvent event) {
+        
+        Window ventanaPadre = btnNuevo.getScene().getWindow();
+        String archivoFXML = "contactos-form-view";
+        String titulo = "Editar Contacto";
+        
+        Contacto contactoSeleccionado = tbvContactos.getSelectionModel().getSelectedItem();
+        ContactosFormViewController.contactoActual = contactoSeleccionado;
+        
+        Stage stage = VentanaUtil.abrirDialogo(ventanaPadre, archivoFXML, titulo, Modality.WINDOW_MODAL);
+        stage.showAndWait();
+        
     }
 
     @FXML
     private void borrar_OnAction(ActionEvent event) {
+        
+        if (tbvContactos.getSelectionModel().getSelectedItems().size() > 0) {
+            Boolean result = VentanaUtil.mostrarAdvertencia("Esta operación no se puede deshacer. ¿Desea continuar?");
+            
+            if (result) {
+                Contacto contactoSeleccionado = tbvContactos.getSelectionModel().getSelectedItem();
+                tbvContactos.getItems().remove(contactoSeleccionado);
+            }
+            
+        } else {
+            VentanaUtil.mostrarError("No hay ningún contacto Seleccionado.");
+        }
+        
+        
+        
     }
 
 }

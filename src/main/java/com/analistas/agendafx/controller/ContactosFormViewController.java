@@ -5,6 +5,7 @@
 package com.analistas.agendafx.controller;
 
 import com.analistas.agendafx.model.Ciudad;
+import com.analistas.agendafx.model.Contacto;
 import com.analistas.agendafx.repository.CiudadRepository;
 import com.analistas.agendafx.util.VentanaUtil;
 import java.net.URL;
@@ -47,17 +48,54 @@ public class ContactosFormViewController implements Initializable {
 
     CiudadRepository ciudadRepo = new CiudadRepository();
 
+    static Contacto contactoActual;
+
     /**
      * Initializes the controller class.
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         cmbLocalidades.getItems().addAll(ciudadRepo.getCiudades());
+        if (contactoActual != null) {
+            //Si se cumple, es una modificación
+            cargarDatosEnCampos();
+        } else {
+            //Sino
+        }
+    }
+
+    private void cargarDatosEnCampos() {
+        txfApellido.setText(contactoActual.getApellido());
+        txfNombre.setText(contactoActual.getNombre());
+        txfDireccion.setText(contactoActual.getDireccion());
+        txfTelefono.setText(contactoActual.getTelefono());
+        dtpFechaNacimiento.setValue(contactoActual.getFechaNacimiento());
+        cmbLocalidades.getSelectionModel().select(contactoActual.getCiudad());
+        txaObservaciones.setText(contactoActual.getObservaciones());
+    }
+
+    private boolean sonCamposValidos() {
+        boolean result = false;
+        if (txfApellido.getText().isBlank()) {
+            VentanaUtil.mostrarError("El apellido es requerido...");
+        } else {
+            result = true;
+        }
+
+        return result;
     }
 
     @FXML
     private void guardar_OnAction(ActionEvent event) {
-        VentanaUtil.mostrarInfo("Guardando Contacto...");
+        if (sonCamposValidos()) {
+            
+            
+            
+            VentanaUtil.mostrarInfo("Guardando Contacto...");
+        }
+
     }
 
     @FXML
