@@ -67,6 +67,19 @@ public class ContactoRepository {
         return contactos;
     }
     
+    public List<Contacto> getContactos(String criterio) {
+        
+        List<Contacto> encontrados = new ArrayList<>();
+        
+        for(Contacto con : contactos) {
+            if (con.getApellido().toLowerCase().contains(criterio.toLowerCase()) || con.getNombre().toLowerCase().contains(criterio.toLowerCase()))  {
+                encontrados.add(con);
+            }
+        }
+        
+        return encontrados;
+    }
+    
     public void addContacto(Contacto contacto) {
         contactos.add(contacto);
     }
@@ -78,5 +91,4 @@ public class ContactoRepository {
             } 
         }
     }
-
 }

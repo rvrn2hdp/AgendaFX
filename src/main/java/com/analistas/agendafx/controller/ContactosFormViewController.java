@@ -48,6 +48,7 @@ public class ContactosFormViewController implements Initializable {
 
     /**
      * Initializes the controller class.
+     *
      * @param url
      * @param rb
      */
@@ -58,7 +59,7 @@ public class ContactosFormViewController implements Initializable {
             //Si se cumple, es una modificación
             cargarDatosEnCampos();
         } else {
-            //Sino
+            //Sino 
         }
     }
 
@@ -73,25 +74,75 @@ public class ContactosFormViewController implements Initializable {
     }
 
     private boolean sonCamposValidos() {
+
         boolean result = false;
+
         if (txfApellido.getText().isBlank()) {
             VentanaUtil.mostrarError("El apellido es requerido...");
+        } else if (txfNombre.getText().isBlank()) {
+            VentanaUtil.mostrarError("El nombre es requerido...");
+        } else if (txfDireccion.getText().isBlank()) {
+            VentanaUtil.mostrarError("La direccion es requerida...");
+        } else if (txfTelefono.getText().isBlank()) {
+            VentanaUtil.mostrarError("El telefono es requerido...");
+        } else if (dtpFechaNacimiento.getValue() == null) {
+            VentanaUtil.mostrarError("El cumpleaños es requerido...");
+        } else if (cmbLocalidades.getSelectionModel().isEmpty()) {
+            VentanaUtil.mostrarError("La ciudad Es requerida...");
+        } else if (txaObservaciones.getText().isBlank()) {
+            VentanaUtil.mostrarError("La Observacion es requerida...");
         } else {
             result = true;
         }
-
         return result;
+    }
+
+    Stage obtenerVentana() {
+        return (Stage) btnCancelar.getScene().getWindow();
     }
 
     @FXML
     private void guardar_OnAction(ActionEvent event) {
-        if (sonCamposValidos()) {
-            
-            
-            
-            VentanaUtil.mostrarInfo("Guardando Contacto...");
-        }
 
+        String mensaje;
+
+        if (sonCamposValidos()) {
+
+            if (obtenerVentana().getTitle().contains("Nuevo")) {
+                //Es Alta...
+
+                //Crear nuevo contacto...
+                contactoActual = new Contacto(ContactosViewController.repo.getContactos().size() + 1,
+                        txfApellido.getText().trim(),
+                        txfNombre.getText().trim(),
+                        txfDireccion.getText().trim(),
+                        txfTelefono.getText().trim(),
+                        dtpFechaNacimiento.getValue(),
+                        txaObservaciones.getText().trim(),
+                        cmbLocalidades.getSelectionModel().getSelectedItem());
+
+                //Guardsar en el repo...
+                ContactosViewController.repo.addContacto(contactoActual);
+
+                mensaje = "Contacto" + contactoActual + " añadido.";
+            } else {
+                //Es modificacion...
+                contactoActual.setApellido(txfApellido.getText().trim());
+                contactoActual.setNombre(txfNombre.getText().trim());
+                contactoActual.setTelefono(txfTelefono.getText().trim());
+                contactoActual.setDireccion(txfDireccion.getText().trim());
+                contactoActual.setCiudad(cmbLocalidades.getSelectionModel().getSelectedItem());
+                contactoActual.setFechaNacimiento(dtpFechaNacimiento.getValue());
+                contactoActual.setObservaciones(txaObservaciones.getText().trim());
+                
+                //Modificar en el repo...
+                ContactosViewController.repo.editContacto(contactoActual);
+                mensaje = "Contacto " + contactoActual + " modificado.";
+            }
+
+            VentanaUtil.mostrarInfo(mensaje);
+            obtenerVentana().close();
+        }
     }
 
     @FXML
