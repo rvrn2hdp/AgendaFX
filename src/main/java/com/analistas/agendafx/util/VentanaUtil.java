@@ -17,14 +17,18 @@ import javafx.stage.Window;
 
 public class VentanaUtil {
 
+    private VentanaUtil() {
+        throw new IllegalStateException("Utility class");
+    }
+
     /**
      * Returns a JavaFX Stage object with a scene loaded from the specified FXML
      * file.
      *
      * @param ventanaPadre the parent window for the dialog
-     * @param archivoFXML the name of the FXML file to load
-     * @param titulo the title of the dialog
-     * @param modalidad the modality of the dialog
+     * @param archivoFXML  the name of the FXML file to load
+     * @param titulo       the title of the dialog
+     * @param modalidad    the modality of the dialog
      * @return a JavaFX Stage object representing the dialog
      */
     public static Stage abrirDialogo(Window ventanaPadre, String archivoFXML, String titulo, Modality modalidad) {

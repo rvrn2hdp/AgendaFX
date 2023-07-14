@@ -49,20 +49,29 @@ public class ContactosFormViewController implements Initializable {
     /**
      * Initializes the controller class.
      *
-     * @param url
-     * @param rb
+     * @param url the URL of the location used to resolve relative paths for the
+     *            root object,
+     *            or null if the location is not known.
+     * @param rb  the resources used to localize the root object,
+     *            or null if the root object was not localized.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        // Populate the items of cmbLocalidades with the list of cities from ciudadRepo
         cmbLocalidades.getItems().addAll(ciudadRepo.getCiudades());
+
         if (contactoActual != null) {
-            //Si se cumple, es una modificación
+            // If contactoActual is not null, it means it is a modification, so load the
+            // data into the fields
             cargarDatosEnCampos();
         } else {
-            //Sino 
+            // Otherwise, it is a new contact, so do nothing
         }
     }
 
+    /**
+     * Sets the values from the current contact to the corresponding GUI fields.
+     */
     private void cargarDatosEnCampos() {
         txfApellido.setText(contactoActual.getApellido());
         txfNombre.setText(contactoActual.getNombre());
@@ -73,6 +82,11 @@ public class ContactosFormViewController implements Initializable {
         txaObservaciones.setText(contactoActual.getObservaciones());
     }
 
+    /**
+     * Checks if all the fields in the form are valid.
+     *
+     * @return true if all fields are valid, false otherwise
+     */
     private boolean sonCamposValidos() {
 
         boolean result = false;
@@ -97,6 +111,11 @@ public class ContactosFormViewController implements Initializable {
         return result;
     }
 
+    /**
+     * Returns the Stage window associated with the btnCancelar button.
+     *
+     * @return the Stage window associated with the btnCancelar button
+     */
     Stage obtenerVentana() {
         return (Stage) btnCancelar.getScene().getWindow();
     }
@@ -109,9 +128,9 @@ public class ContactosFormViewController implements Initializable {
         if (sonCamposValidos()) {
 
             if (obtenerVentana().getTitle().contains("Nuevo")) {
-                //Es Alta...
+                // Es Alta...
 
-                //Crear nuevo contacto...
+                // Crear nuevo contacto...
                 contactoActual = new Contacto(ContactosViewController.repo.getContactos().size() + 1,
                         txfApellido.getText().trim(),
                         txfNombre.getText().trim(),
@@ -121,12 +140,12 @@ public class ContactosFormViewController implements Initializable {
                         txaObservaciones.getText().trim(),
                         cmbLocalidades.getSelectionModel().getSelectedItem());
 
-                //Guardsar en el repo...
+                // Guardsar en el repo...
                 ContactosViewController.repo.addContacto(contactoActual);
 
                 mensaje = "Contacto" + contactoActual + " añadido.";
             } else {
-                //Es modificacion...
+                // Es modificacion...
                 contactoActual.setApellido(txfApellido.getText().trim());
                 contactoActual.setNombre(txfNombre.getText().trim());
                 contactoActual.setTelefono(txfTelefono.getText().trim());
@@ -134,8 +153,8 @@ public class ContactosFormViewController implements Initializable {
                 contactoActual.setCiudad(cmbLocalidades.getSelectionModel().getSelectedItem());
                 contactoActual.setFechaNacimiento(dtpFechaNacimiento.getValue());
                 contactoActual.setObservaciones(txaObservaciones.getText().trim());
-                
-                //Modificar en el repo...
+
+                // Modificar en el repo...
                 ContactosViewController.repo.editContacto(contactoActual);
                 mensaje = "Contacto " + contactoActual + " modificado.";
             }
@@ -145,10 +164,17 @@ public class ContactosFormViewController implements Initializable {
         }
     }
 
+    /**
+     * Cancels the operation when the cancel button is pressed.
+     *
+     * @param event the action event
+     */
     @FXML
     private void cancelar_OnAction(ActionEvent event) {
 
+        // Prompt for user confirmation
         if (VentanaUtil.pedirConfirmacion("¿Desea cancelar la operación?")) {
+            // Close the current stage
             Stage stage = (Stage) btnCancelar.getScene().getWindow();
             stage.close();
         }

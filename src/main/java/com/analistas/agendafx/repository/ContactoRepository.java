@@ -12,7 +12,7 @@ import java.util.List;
 public class ContactoRepository {
 
     CiudadRepository ciudadRepo = new CiudadRepository();
-    
+
     List<Contacto> contactos;
 
     public ContactoRepository() {
@@ -66,29 +66,31 @@ public class ContactoRepository {
     public List<Contacto> getContactos() {
         return contactos;
     }
-    
+
     public List<Contacto> getContactos(String criterio) {
-        
+
         List<Contacto> encontrados = new ArrayList<>();
-        
-        for(Contacto con : contactos) {
-            if (con.getApellido().toLowerCase().contains(criterio.toLowerCase()) || con.getNombre().toLowerCase().contains(criterio.toLowerCase()))  {
+
+        for (Contacto con : contactos) {
+            if (con.getApellido().toLowerCase().contains(criterio.toLowerCase())
+                    || con.getNombre().toLowerCase().contains(criterio.toLowerCase())) {
                 encontrados.add(con);
             }
         }
-        
+
         return encontrados;
     }
-    
+
     public void addContacto(Contacto contacto) {
         contactos.add(contacto);
     }
-    
+
     public void editContacto(Contacto contacto) {
-        for(Contacto c : contactos) {
-            if (c.getId() == contacto.getId()) {
-                c = contacto;
-            } 
+        for (int i = 0; i < contactos.size(); i++) {
+            if (contactos.get(i).getId() == contacto.getId()) {
+                contactos.set(i, contacto);
+                break;
+            }
         }
     }
 }
